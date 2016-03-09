@@ -12,7 +12,7 @@
     var w = 200,
         h = 200;
 
-    var padding = 20;
+    var padding = 40;
 
     var array = [
                 [100,50],
@@ -31,7 +31,7 @@
 
     var yScale = d3.scale.linear()
                   .domain([d3.min(array, function(d){return d[1]}),d3.max(array, function(d){return d[1]})])
-                  .range([0 + padding, h - padding]);
+                  .range([h - padding, 0 + padding]);
 
                   // will make "y" values actually go bottom-up (opp of coord system).range([h - padding, 0 + padding]);
 
@@ -52,6 +52,15 @@
                        .attr('r', 4)
                        .attr('fill', function(d,i){return 'rgb(' + yScale(d[1]) + ',0,0)'});
 
+    var text = svg.selectAll('text')
+                  .data(array)
+                  .enter()
+                  .append('text')
+                  .attr('x',function(d){return xScale(d[0])})
+                  .attr('y',function(d){return yScale(d[1])})
+                  .text(function(d){return d[0] + "," + d[1]})
+                  .style('font-family', 'sans-serif')
+                  .style('font-size', '8px')
     </script>
   </body>
 </html>
