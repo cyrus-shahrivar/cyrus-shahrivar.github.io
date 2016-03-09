@@ -3,30 +3,54 @@
   <head>
     <meta charset="utf-8">
     <title>D3 Playground</title>
-    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="d3.js" charset="utf-8"></script>
     <style>
     </style>
   </head>
   <body>
     <script>
+    var w = 200,
+        h = 200;
+
+    var padding = 20;
+
     var array = [
                 [100,50],
                 [30,20],
-                [30,100]
+                [30,100],
+                [40,20],
+                [60,30],
+                [70,40],
+                [54,10],
+                [30,160]
                 ];
 
+    var xScale = d3.scale.linear()
+                  .domain([d3.min(array, function(d){return d[0]}),d3.max(array, function(d){return d[0]})])
+                  .range([0 + padding, w - padding]);
+
+    var yScale = d3.scale.linear()
+                  .domain([d3.min(array, function(d){return d[1]}),d3.max(array, function(d){return d[1]})])
+                  .range([0 + padding, h - padding]);
+
+                  // will make "y" values actually go bottom-up (opp of coord system).range([h - padding, 0 + padding]);
+
     var svg = d3.select('body').append('svg')
-                .attr('width', 200)
-                .attr('height',200);
+                .attr('width', w)
+                .attr('height', h);
 
     var circles = svg.selectAll('circle')
                      .data(array)
                      .enter()
                      .append('circle')
-                     .attr('cx', function(d){return d[0]})
-                     .attr('cy', function(d){return d[1]})
-                     .attr('r', function(d){return Math.random()*d[0]})
-                     .attr('fill', function(d,i){return 'rgb(0,0,' + d[1]*10 + ')'});
+                     .attr('cx', function(d){return xScale(d[0])})
+                     .attr('cy', 0)
+                     .attr('r', 0)
+                     .transition()
+                       .duration(2000)
+                       .attr('cy', function(d){return yScale(d[1])})
+                       .attr('r', 4)
+                       .attr('fill', function(d,i){return 'rgb(' + yScale(d[1]) + ',0,0)'});
 
     </script>
   </body>
