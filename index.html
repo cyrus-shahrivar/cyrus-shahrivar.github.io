@@ -66,16 +66,6 @@
                        .attr('r', 4)
                        .attr('fill', function(d,i){return 'rgb(' + yScale(d[1]) + ',0,0)'});
 
-    // var text = svg.selectAll('text')
-    //               .data(array)
-    //               .enter()
-    //               .append('text')
-    //               .attr('x',function(d){return xScale(d[0])})
-    //               .attr('y',function(d){return yScale(d[1])})
-    //               .text(function(d){return d[0] + "," + d[1]})
-    //               .style('font-family', 'sans-serif')
-    //               .style('font-size', '8px');
-
     var xAxis = d3.svg.axis()
                   .scale(xScale)
                   .orient('bottom');
