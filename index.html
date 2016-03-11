@@ -5,6 +5,7 @@
     <title>D3 Playground</title>
     <script src="d3.js" charset="utf-8"></script>
     <style>
+    /* d3 styling */
     .axis path,
     .axis line {
         fill: none;
@@ -20,12 +21,14 @@
   </head>
   <body>
     <script>
+    //program variables
     var w = 600,
         h = 200;
 
     var padding = 40;
 
     var array = [];
+    // random data filling
     var numDataPoints = 50;
     var xRange = Math.random() * 500;
     var yRange = Math.random() * 500;
@@ -35,6 +38,7 @@
         array.push([newNumber1, newNumber2]);
     }
 
+    //scaling
     var xScale = d3.scale.linear()
                   .domain([d3.min(array, function(d){return d[0]}),d3.max(array, function(d){return d[0]})])
                   .range([0 + padding, w - padding]);
@@ -44,11 +48,12 @@
                   .range([h - padding, 0 + padding]);
 
                   // will make "y" values actually go bottom-up (opp of coord system).range([h - padding, 0 + padding]);
-
+    //creates svg
     var svg = d3.select('body').append('svg')
                 .attr('width', w)
                 .attr('height', h);
 
+    //creates, animates circles
     var circles = svg.selectAll('circle')
                      .data(array)
                      .enter()
@@ -66,6 +71,7 @@
                        .attr('r', 4)
                        .attr('fill', function(d,i){return 'rgb(' + yScale(d[1]) + ',0,0)'});
 
+    //creates axes
     var xAxis = d3.svg.axis()
                   .scale(xScale)
                   .orient('bottom');
