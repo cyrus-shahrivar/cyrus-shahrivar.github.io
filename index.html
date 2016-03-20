@@ -6,6 +6,7 @@
     <script src="d3.js" charset="utf-8"></script>
     <style>
     /* d3 styling */
+    /* notice that styles for svgs are somewhat different*/
     .axis path,
     .axis line {
         fill: none;
@@ -75,7 +76,7 @@
     var xAxis = d3.svg.axis()
                   .scale(xScale)
                   .orient('bottom');
-                  // .tickFormat(d3.format(".1%")); // could add format to ticks as needed
+
 
     var yAxis = d3.svg.axis()
                   .scale(yScale)
