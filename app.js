@@ -6,10 +6,12 @@ var width = 400,
 
 var colors = d3.scale.category20();
 
+var totalRefugees2014 = 19500000;
+var usRefugees2014 = 69986;
+
 var pieValues = [
-  {name: "Cyrus", value: 20},
-  {name: "Courtney", value: 50},
-  {name: "Zeus", value: 40}
+  {name: "Refugees Not Resettled in U.S.", value: (totalRefugees2014-usRefugees2014)},
+  {name: "Refugees Resettled in U.S.", value: usRefugees2014}
 ];
 
 var pie = d3.layout.pie()
